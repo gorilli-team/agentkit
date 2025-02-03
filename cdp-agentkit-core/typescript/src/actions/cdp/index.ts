@@ -19,7 +19,7 @@ import { CreateERC4626VaultAction } from "./gorilli_create_vault";
  * @returns - Array of CDP action instances
  */
 export function getAllCdpActions(): CdpAction<CdpActionSchemaAny>[] {
-  return [
+  const CDP_ACTIONS = [
     new GetWalletDetailsAction(),
     new DeployNftAction(),
     new DeployTokenAction(),
@@ -32,6 +32,9 @@ export function getAllCdpActions(): CdpAction<CdpActionSchemaAny>[] {
     new WrapEthAction(),
     new CreateERC4626VaultAction(),
   ];
+
+  console.log("RETRIEVED CDP_ACTIONS", CDP_ACTIONS);
+  return CDP_ACTIONS;
 }
 
 export const CDP_ACTIONS = getAllCdpActions().concat(WOW_ACTIONS);

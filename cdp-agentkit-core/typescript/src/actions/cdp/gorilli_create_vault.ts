@@ -72,7 +72,7 @@ export async function createERC4626Vault(args: z.infer<typeof CreateVaultInput>)
  * Create ERC-4626 Vault action.
  */
 export class CreateERC4626VaultAction implements CdpAction<typeof CreateVaultInput> {
-  public name = "create_erc4626_vault";
+  public name = "gorilli_create_erc4626_vault";
   public description = CREATE_VAULT_PROMPT;
   public argsSchema = CreateVaultInput;
   public func = createERC4626Vault;

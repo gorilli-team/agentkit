@@ -41,24 +41,25 @@ export const CreateVaultInput = z
 /**
  * Creates an ERC-4626 vault.
  *
- * @param args The input parameters for creating the vault
- * @param args.name The name of the vault
- * @param args.symbol The symbol for the vault token
- * @param args.assetAddress The address of the underlying ERC-20 asset
- * @param args.feeRecipient The address that will receive fees from the vault
- * @param args.depositFee The percentage deposit fee (0-100)
- * @param args.withdrawalFee The percentage withdrawal fee (0-100)
+ * @param args - The input parameters for creating the vault
+ * @param args.name - The name of the vault
+ * @param args.symbol - The symbol for the vault token
+ * @param args.assetAddress - The address of the underlying ERC-20 asset
+ * @param args.feeRecipient - The address that will receive fees from the vault
+ * @param args.depositFee - The percentage deposit fee (0-100)
+ * @param args.withdrawalFee - The percentage withdrawal fee (0-100)
  * @returns A confirmation message containing the vault address.
  */
 export async function createERC4626Vault(args: z.infer<typeof CreateVaultInput>): Promise<string> {
   try {
-    // Simulate the vault creation process and return a mock response
     const { name, symbol, assetAddress, feeRecipient, depositFee, withdrawalFee } = args;
+    // Generate a mock vault address
+    const mockVaultAddress = "0x" + "1".repeat(40);
 
-    // Returning a mock success message for now
     return `Successfully created ERC-4626 Vault:
       Name: ${name}
       Symbol: ${symbol}
+      Vault Address: ${mockVaultAddress}
       Asset Address: ${assetAddress}
       Fee Recipient: ${feeRecipient}
       Deposit Fee: ${depositFee}%

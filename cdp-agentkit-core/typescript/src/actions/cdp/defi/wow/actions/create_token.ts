@@ -74,7 +74,7 @@ export async function wowCreateToken(
  * Zora Wow create token action.
  */
 export class WowCreateTokenAction implements CdpAction<typeof WowCreateTokenInput> {
-  public name = "wow_create_token";
+  public name = "wow_create_token_1";
   public description = WOW_CREATE_TOKEN_PROMPT;
   public argsSchema = WowCreateTokenInput;
   public func = wowCreateToken;

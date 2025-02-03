@@ -1,5 +1,7 @@
 import { CdpAction } from "./cdp_action";
 import { z } from "zod";
+import { ethers } from "ethers";
+import ERC4626VaultABI from "../../ERC4626VaultABI.json";
 
 const CREATE_VAULT_PROMPT = `
 This tool allows users to create an ERC-4626 vault. ERC-4626 is a tokenized vault standard for yield-bearing assets in DeFi. Use this tool when a user needs to deploy a new vault for managing assets efficiently.
@@ -42,30 +44,48 @@ export const CreateVaultInput = z
  * Creates an ERC-4626 vault.
  *
  * @param args - The input parameters for creating the vault
- * @param args.name - The name of the vault
- * @param args.symbol - The symbol for the vault token
- * @param args.assetAddress - The address of the underlying ERC-20 asset
- * @param args.feeRecipient - The address that will receive fees from the vault
- * @param args.depositFee - The percentage deposit fee (0-100)
- * @param args.withdrawalFee - The percentage withdrawal fee (0-100)
  * @returns A confirmation message containing the vault address.
  */
 export async function createERC4626Vault(args: z.infer<typeof CreateVaultInput>): Promise<string> {
   try {
     const { name, symbol, assetAddress, feeRecipient, depositFee, withdrawalFee } = args;
-    // Generate a mock vault address
-    const mockVaultAddress = "0x" + "1".repeat(40);
 
-    return `Successfully created ERC-4626 Vault:
+    // Setup provider and wallet
+    const provider = new ethers.JsonRpcProvider("https://sepolia.base.org");
+    const privateKey = process.env.PRIVATE_KEY;
+    if (!privateKey) {
+      throw new Error("PRIVATE_KEY environment variable is not set");
+    }
+    const wallet = new ethers.Wallet(privateKey, provider);
+
+    // Define contract factory and deploy vault
+    const VaultFactory = new ethers.ContractFactory(
+      ERC4626VaultABI.abi,
+      ERC4626VaultABI.bytecode,
+      wallet,
+    );
+    const vault = await VaultFactory.deploy(
+      assetAddress,
+      name,
+      symbol,
+      feeRecipient,
+      depositFee,
+      withdrawalFee,
+    );
+    await vault.waitForDeployment();
+    const vaultAddress = await vault.getAddress();
+
+    return `Successfully deployed ERC-4626 Vault:
       Name: ${name}
       Symbol: ${symbol}
-      Vault Address: ${mockVaultAddress}
+      Vault Address: ${vaultAddress}
       Asset Address: ${assetAddress}
       Fee Recipient: ${feeRecipient}
       Deposit Fee: ${depositFee}%
       Withdrawal Fee: ${withdrawalFee}%`;
-  } catch (error) {
-    throw new Error(`Failed to deploy ERC-4626 Vault'}`);
+  } catch (error: Error | unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    throw new Error(`Failed to deploy ERC-4626 Vault: ${errorMessage}`);
   }
 }
 

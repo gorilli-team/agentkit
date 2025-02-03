@@ -1,0 +1,27 @@
+{
+    "abi": [
+      {
+        "inputs": [
+          { "internalType": "address", "name": "_asset", "type": "address" },
+          { "internalType": "string", "name": "_name", "type": "string" },
+          { "internalType": "string", "name": "_symbol", "type": "string" },
+          { "internalType": "address", "name": "_feeRecipient", "type": "address" },
+          { "internalType": "uint256", "name": "_depositFee", "type": "uint256" },
+          { "internalType": "uint256", "name": "_withdrawalFee", "type": "uint256" }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [],
+        "name": "asset",
+        "outputs": [
+          { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ],
+    "bytecode": "0x608060405234801561001057600080fd5b5060405161011d38038061011d83398101604081905261002f91610041565b600080546001600160a01b03929092168252565b60008135905061005b816100a7565b92915050565b60006020828403121561007757600080fd5b600061008584828501610052565b91505092915050565b6100a1816100b6565b82525050565b60006020820190506100bc6000830184610098565b9291505056fea2646970667358221220ccaf9809eeb69bde6c3b2dcb4419476cf94a2f1b98c22e42dc10c531a865bb0164736f6c63430008130033"
+  }
+  

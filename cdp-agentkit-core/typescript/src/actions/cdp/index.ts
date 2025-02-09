@@ -37,7 +37,10 @@ export function getAllCdpActions(): CdpAction<CdpActionSchemaAny>[] {
     new GorilliMemeTradeAction(),
   ];
 
-  console.log("RETRIEVED CDP_ACTIONS", CDP_ACTIONS);
+  console.log(
+    "RETRIEVED CDP_ACTIONS",
+    CDP_ACTIONS.map(action => action.name),
+  );
   return CDP_ACTIONS;
 }
 

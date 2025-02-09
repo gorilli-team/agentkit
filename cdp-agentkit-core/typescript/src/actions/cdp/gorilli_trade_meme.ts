@@ -98,7 +98,7 @@ export async function gorilliMemeTrade(
 /**
  * Gorilli Trade action.
  */
-export class GorilliTradeAction implements CdpAction<typeof GorilliMemeTradeInput> {
+export class GorilliMemeTradeAction implements CdpAction<typeof GorilliMemeTradeInput> {
   public name = "gorilli_trade_meme";
   public description = MEME_TRADE_PROMPT;
   public argsSchema = GorilliMemeTradeInput;

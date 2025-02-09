@@ -12,6 +12,7 @@ import { WrapEthAction } from "./wrap_eth";
 import { WOW_ACTIONS } from "./defi/wow";
 import { CreateERC4626VaultAction } from "./gorilli_create_vault";
 import { GorilliTradeAction } from "./gorilli_trade";
+import { GorilliMemeTradeAction } from "./gorilli_trade_meme";
 
 /**
  * Retrieves all CDP action instances.
@@ -33,6 +34,7 @@ export function getAllCdpActions(): CdpAction<CdpActionSchemaAny>[] {
     new WrapEthAction(),
     new CreateERC4626VaultAction(),
     new GorilliTradeAction(),
+    new GorilliMemeTradeAction(),
   ];
 
   console.log("RETRIEVED CDP_ACTIONS", CDP_ACTIONS);
